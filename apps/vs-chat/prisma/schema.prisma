@@ -8,8 +8,14 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
-model Example {
-    id String @id @default(cuid())
+model Comment{
+    commentID String   @id @default(cuid())
+    content
+    length    length
+    createdAt DateTime @default(now())
+    createdBy String
+    snippetID
+    reviewID
 }
 
 // Necessary for Next auth
