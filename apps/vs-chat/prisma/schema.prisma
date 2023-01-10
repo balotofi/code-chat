@@ -16,10 +16,28 @@ model Comment{
     createdAt DateTime @default(now())
     author    User?    @relation(fields: [authorId], references: [id])
     authorId  String   @db.ObjectId
-    snippetID
-    reviewID
 }
 
+model CodeReviewRequest{
+       createdAt DateTime @default(now())
+       reviewID  String   @relation(fields: [authorId], references: [id])
+       generatedURL String 
+       permalink
+       requester (devID)
+}
+
+model CodeSnippet{
+    snippetID
+    permalink
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    author User? @relation(fields:[], references:[])
+    authorId  String   @db.ObjectId
+    reviewedAt
+    modifiedBy User? @relation() (devID)
+    length
+    content
+}
 enum Role {
   DEVELOPER
   REVIEWER
